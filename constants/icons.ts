@@ -7,7 +7,7 @@ import star from "@/assets/icons/star.png";
 import play from "@/assets/icons/play.png";
 import arrow from "@/assets/icons/arrow.png";
 
-export const icons = {
+const icons = {
   home,
   search,
   person,
@@ -17,3 +17,5 @@ export const icons = {
   play,
   arrow,
 };
+
+export default icons;
