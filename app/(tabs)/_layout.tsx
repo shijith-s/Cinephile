@@ -16,10 +16,10 @@ const Layout = () => {
         },
         tabBarStyle: {
           backgroundColor: theme.colors.secondary,
-          borderRadius: 50,
+          borderRadius: 40,
           marginHorizontal: 10,
           marginBottom: 36,
-          height: 52,
+          height: 47,
           position: "absolute",
           overflow: "hidden",
           borderColor: "transparent",
