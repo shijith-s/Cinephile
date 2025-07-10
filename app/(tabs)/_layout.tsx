@@ -1,6 +1,7 @@
 import { Tabs } from "expo-router";
 import icons from "@/constants/icons";
 import TabIcon from "@/components/TabIcon";
+import theme from "@/constants/theme";
 
 const Layout = () => {
   return (
@@ -14,7 +15,7 @@ const Layout = () => {
           alignItems: "center",
         },
         tabBarStyle: {
-          backgroundColor: "#151312",
+          backgroundColor: theme.colors.secondary,
           borderRadius: 50,
           marginHorizontal: 10,
           marginBottom: 36,
