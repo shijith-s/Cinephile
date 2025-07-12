@@ -21,7 +21,7 @@ export default function HomePage() {
     data: movies,
     loading: moviesLoading,
     error: moviesError,
-  } = useFetch(() => fetchMovies(null));
+  } = useFetch(fetchMovies);
 
   const onSearchBarPress = () => {
     router.push("/search");
@@ -36,11 +36,14 @@ export default function HomePage() {
           minHeight: "100%",
           paddingBottom: 100,
         }}
-        className="flex-1 px-5 pt-10"
+        className="flex-1 px-5"
       >
         <Image source={icons.logo} className="w-12 h-10 mb-20 mt-24 mx-auto" />
         {moviesLoading ? (
-          <ActivityIndicator size="large" color={theme.colors.activityIndicator} />
+          <ActivityIndicator
+            size="large"
+            color={theme.colors.activityIndicator}
+          />
         ) : moviesError ? (
           <Text className="text-white text-center">
             Error: {moviesError?.message}
@@ -59,10 +62,13 @@ export default function HomePage() {
               renderItem={({ item }) => <MovieCard {...item} />}
               keyExtractor={(item) => item.id.toString()}
               numColumns={3}
+              className="mb-4 mt-3"
               columnWrapperStyle={{
-                justifyContent: "flex-start",
-                gap: 10,
+                justifyContent: "space-between",
                 marginBottom: 30,
+              }}
+              contentContainerStyle={{
+                gap: 3,
               }}
               scrollEnabled={false}
             />
