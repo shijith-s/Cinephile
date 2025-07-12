@@ -11,6 +11,7 @@ const theme = {
       d100: "#221f3d",
       d200: "#0f0d23",
     },
+    activityIndicator: "#fff",
   },
 };
 

@@ -13,6 +13,7 @@ import SearchBar from "@/components/SearchBar";
 import useFetch from "@/services/useFetch";
 import { fetchMovies } from "@/services/api";
 import MovieCard from "@/components/MovieCard";
+import theme from "@/constants/theme";
 
 export default function HomePage() {
   const router = useRouter();
@@ -39,7 +40,7 @@ export default function HomePage() {
       >
         <Image source={icons.logo} className="w-12 h-10 mb-20 mt-24 mx-auto" />
         {moviesLoading ? (
-          <ActivityIndicator size="large" color="#fff" />
+          <ActivityIndicator size="large" color={theme.colors.activityIndicator} />
         ) : moviesError ? (
           <Text className="text-white text-center">
             Error: {moviesError?.message}
@@ -50,7 +51,7 @@ export default function HomePage() {
               placeholder="Search for a movie"
               onPress={onSearchBarPress}
             />
-            <Text className="text-white mt-5 mb-5 text-lg font-bold">
+            <Text className="text-white mt-8 mb-5 text-lg font-semibold">
               Latest Movies
             </Text>
             <FlatList
