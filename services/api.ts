@@ -16,10 +16,7 @@ const fetchMovies = async (query: string | null) => {
     method: "GET",
     headers: TMDB_CONFIG.headers,
   };
-  console.log(url, options);
   const response = await fetch(url, options);
-  console.log(response);
-
   if (!response.ok) {
     throw new Error("Failed to fetch movies");
   }
@@ -27,4 +24,10 @@ const fetchMovies = async (query: string | null) => {
   return data.results;
 };
 
-export { fetchMovies };
+const getMoviePosterUrl = (posterPath: string) => {
+  return posterPath
+    ? `${TMDB_CONFIG.IMAGE_BASE_URL}${posterPath}`
+    : TMDB_CONFIG.NO_IMAGE_URL;
+};
+
+export { fetchMovies, getMoviePosterUrl };
