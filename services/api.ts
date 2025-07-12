@@ -1,7 +1,7 @@
 import TMDB_CONFIG from "./TMDB_config";
 
 const getURL = (endPoint: string, query: string | null) => {
-  const encodedQuery = query ? encodeURIComponent(query) : "";
+  const encodedQuery = query ? `query=${encodeURIComponent(query)}` : "";
   const url = `${TMDB_CONFIG.BASE_URL}${endPoint}?${encodedQuery}`;
   return url;
 };
