@@ -64,12 +64,9 @@ export default function HomePage() {
               numColumns={3}
               className="mb-4 mt-3"
               columnWrapperStyle={{
-                justifyContent: "flex-start",
-                gap: 20,
+                justifyContent: "space-between",
+                gap: 10,
                 marginBottom: 30,
-              }}
-              contentContainerStyle={{
-                gap: 3,
               }}
               scrollEnabled={false}
             />
