@@ -17,6 +17,7 @@ module.exports = {
           100: theme.colors.dark.d100,
           200: theme.colors.dark.d200,
         },
+        accent: theme.colors.accent,
       },
     },
   },

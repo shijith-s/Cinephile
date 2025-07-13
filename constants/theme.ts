@@ -11,7 +11,9 @@ const theme = {
       d100: "#221f3d",
       d200: "#0f0d23",
     },
+    white: "#fff",
     activityIndicator: "#fff",
+    accent: "#AB8BFF",
   },
 };
 
