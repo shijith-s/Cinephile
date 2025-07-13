@@ -28,7 +28,7 @@ export default function HomePage() {
         renderItem={({ item }) => <MovieCard {...item} />}
         keyExtractor={(item) => item.id.toString()}
         numColumns={3}
-        className="mb-4 mt-3"
+        className="mb-4 mt-3 px-5"
         columnWrapperStyle={{
           justifyContent: "space-between",
           gap: 10,
