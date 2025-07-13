@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
+import { fetchMovieDetails } from "./api";
 
-const useFetch = <T>(
-  fetchFunction: (query: string | null) => Promise<T>,
-  autoFetch: boolean = true,
-  query: string | null = null
+const useFetchDetails = (
+  movieId: string | null = null,
+  autoFetch: boolean = true
 ) => {
-  const [data, setData] = useState<T | null>(null);
+  const [data, setData] = useState<MovieDetails | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
 
-  const fetchData = async (query: string | null = null) => {
+  const fetchData = async () => {
     try {
       setLoading(true);
       setError(null);
 
-      const result = await fetchFunction(query);
+      const result = await fetchMovieDetails(movieId);
       setData(result);
     } catch (error) {
       setError(error instanceof Error ? error : new Error("An error occurred"));
@@ -31,7 +31,7 @@ const useFetch = <T>(
 
   useEffect(() => {
     if (autoFetch) {
-      fetchData(query);
+      fetchData();
     }
   }, []);
 
@@ -44,4 +44,4 @@ const useFetch = <T>(
   };
 };
 
-export default useFetch;
+export default useFetchDetails;

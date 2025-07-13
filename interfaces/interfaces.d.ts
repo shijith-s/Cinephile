@@ -75,3 +75,10 @@ interface TrendingCardProps {
   movie: TrendingMovie;
   index: number;
 }
+
+interface MovieResponse {
+  results: Movie[];
+  page: number;
+  total_pages: number;
+  total_results: number;
+}

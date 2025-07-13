@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import React from "react";
 import { router, useLocalSearchParams } from "expo-router";
-import { fetchMovieDetails, getMoviePosterUrl } from "@/services/api";
+import { getMoviePosterUrl } from "@/services/api";
 import useFetchDetails from "@/services/useFetchDetails";
 import icons from "@/constants/icons";
 import { getMovieDetails } from "@/utils/movieUtils";
@@ -17,11 +17,7 @@ import theme from "@/constants/theme";
 
 const MovieDetails = () => {
   const { id } = useLocalSearchParams();
-  const { data: movieDetails, loading } = useFetchDetails(
-    fetchMovieDetails,
-    true,
-    id as string
-  );
+  const { data: movieDetails, loading } = useFetchDetails(id as string);
 
   const {
     title,
