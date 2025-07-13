@@ -4,7 +4,7 @@ import MovieListEmpty from "@/components/MovieListEmpty";
 import icons from "@/constants/icons";
 import images from "@/constants/images";
 import { fetchMovies } from "@/services/api";
-import useFetch from "@/services/useFetch";
+import useInfiniteFetch from "@/services/useInfiniteFetch";
 import { debounce } from "@/utils";
 import React, { useEffect, useRef, useState } from "react";
 import { FlatList, Image, Text, View } from "react-native";
@@ -18,11 +18,12 @@ const SearchPage = () => {
     error,
     refetch,
     reset,
-  } = useFetch(fetchMovies, false);
+    loadMore,
+  } = useInfiniteFetch(fetchMovies, searchQuery, false);
 
   const loadMovies = async (searchQuery: string = "") => {
     if (searchQuery?.trim()) {
-      await refetch(searchQuery);
+      await refetch();
     } else {
       reset();
     }
@@ -86,6 +87,8 @@ const SearchPage = () => {
             )}
           </>
         }
+        onEndReachedThreshold={0.5}
+        onEndReached={loadMore}
       />
     </View>
   );

@@ -4,7 +4,7 @@ import SearchBar from "@/components/SearchBar";
 import icons from "@/constants/icons";
 import images from "@/constants/images";
 import { fetchMovies } from "@/services/api";
-import useFetch from "@/services/useFetch";
+import useInfiniteFetch from "@/services/useInfiniteFetch";
 import { useRouter } from "expo-router";
 import { FlatList, Image, Text, View } from "react-native";
 
@@ -14,7 +14,8 @@ export default function HomePage() {
     data: movies,
     loading: moviesLoading,
     error: moviesError,
-  } = useFetch(fetchMovies);
+    loadMore,
+  } = useInfiniteFetch(fetchMovies, null);
 
   const onSearchBarPress = () => {
     router.push("/search");
@@ -60,6 +61,8 @@ export default function HomePage() {
             </View>
           </>
         }
+        onEndReachedThreshold={0.5}
+        onEndReached={loadMore}
       />
     </View>
   );

@@ -1,18 +1,18 @@
 import TMDB_CONFIG from "./TMDB_config";
 
-const getURL = (endPoint: string, query: string | null) => {
-  const encodedQuery = query ? `query=${encodeURIComponent(query)}` : "";
-  const url = `${TMDB_CONFIG.BASE_URL}${endPoint}?${encodedQuery}`;
+const getURL = (endPoint: string, query: string | null, page: number) => {
+  const encodedQuery = query ? `&query=${encodeURIComponent(query)}` : "";
+  const url = `${TMDB_CONFIG.BASE_URL}${endPoint}?&page=${page}${encodedQuery}`;
   return url;
 };
 
 // This function is used to fetch movies from the TMDB API
 // Query is the search query, if it is null, it will fetch the popular movies
-const fetchMovies = async (query: string | null) => {
+const fetchMovies = async (query: string | null, page: number) => {
   const endPoint = query
     ? TMDB_CONFIG.endpoints.search
     : TMDB_CONFIG.endpoints.discover;
-  const url = getURL(endPoint, query);
+  const url = getURL(endPoint, query, page);
 
   const options = {
     method: "GET",
@@ -23,7 +23,7 @@ const fetchMovies = async (query: string | null) => {
     throw new Error("Failed to fetch movies");
   }
   const data = await response.json();
-  return data.results;
+  return data;
 };
 
 // This function is used to fetch movie details from the TMDB API
