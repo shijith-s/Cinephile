@@ -11,6 +11,7 @@ import { FlatList, Image, Text, View } from "react-native";
 
 const SearchPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
 
   const {
     data: movies,
@@ -27,11 +28,13 @@ const SearchPage = () => {
     } else {
       reset();
     }
+    setIsTyping(false);
   };
 
   const debouncedLoadMovies = useRef(debounce(loadMovies)).current;
 
   useEffect(() => {
+    setIsTyping(true);
     debouncedLoadMovies(searchQuery);
   }, [searchQuery]);
 
@@ -60,7 +63,7 @@ const SearchPage = () => {
         ListEmptyComponent={
           <MovieListEmpty
             searchTerm={searchQuery}
-            loading={loading}
+            loading={loading || isTyping}
             error={error}
           />
         }
