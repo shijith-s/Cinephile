@@ -8,7 +8,7 @@ interface Props {
   error?: Error | null;
 }
 
-const SearchedMoviesEmpty = ({ searchTerm, loading, error }: Props) => {
+const MovieListEmpty = ({ searchTerm, loading, error }: Props) => {
   const isEmpty = !loading && !error;
   const isSearchTermPresent = searchTerm?.trim();
   return (
@@ -35,4 +35,4 @@ const SearchedMoviesEmpty = ({ searchTerm, loading, error }: Props) => {
   );
 };
 
-export default SearchedMoviesEmpty;
+export default MovieListEmpty;

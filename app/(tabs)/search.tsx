@@ -1,6 +1,6 @@
 import MovieCard from "@/components/MovieCard";
 import SearchBar from "@/components/SearchBar";
-import SearchedMoviesEmpty from "@/components/SearchedMoviesEmpty";
+import MovieListEmpty from "@/components/MovieListEmpty";
 import icons from "@/constants/icons";
 import images from "@/constants/images";
 import { fetchMovies } from "@/services/api";
@@ -57,7 +57,7 @@ const SearchPage = () => {
           gap: 3,
         }}
         ListEmptyComponent={
-          <SearchedMoviesEmpty
+          <MovieListEmpty
             searchTerm={searchQuery}
             loading={loading}
             error={error}

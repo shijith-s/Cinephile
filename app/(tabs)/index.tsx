@@ -1,19 +1,12 @@
-import { useRouter } from "expo-router";
+import MovieCard from "@/components/MovieCard";
+import SearchedMoviesEmpty from "@/components/MovieListEmpty";
+import SearchBar from "@/components/SearchBar";
 import icons from "@/constants/icons";
 import images from "@/constants/images";
-import {
-  ActivityIndicator,
-  FlatList,
-  Image,
-  ScrollView,
-  Text,
-  View,
-} from "react-native";
-import SearchBar from "@/components/SearchBar";
-import useFetch from "@/services/useFetch";
 import { fetchMovies } from "@/services/api";
-import MovieCard from "@/components/MovieCard";
-import theme from "@/constants/theme";
+import useFetch from "@/services/useFetch";
+import { useRouter } from "expo-router";
+import { FlatList, Image, Text, View } from "react-native";
 
 export default function HomePage() {
   const router = useRouter();
@@ -30,49 +23,44 @@ export default function HomePage() {
   return (
     <View className="flex-1 bg-primary">
       <Image source={images.bg} className="absolute w-full z-0" />
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{
-          minHeight: "100%",
-          paddingBottom: 100,
+      <FlatList
+        data={movies}
+        renderItem={({ item }) => <MovieCard {...item} />}
+        keyExtractor={(item) => item.id.toString()}
+        numColumns={3}
+        className="mb-4 mt-3"
+        columnWrapperStyle={{
+          justifyContent: "space-between",
+          gap: 10,
+          paddingBottom: 80,
         }}
-        className="flex-1 px-5"
-      >
-        <Image source={icons.logo} className="w-12 h-10 mb-20 mt-24 mx-auto" />
-        {moviesLoading ? (
-          <ActivityIndicator
-            size="large"
-            color={theme.colors.activityIndicator}
+        ListEmptyComponent={
+          <SearchedMoviesEmpty
+            searchTerm={""}
+            loading={moviesLoading}
+            error={moviesError}
           />
-        ) : moviesError ? (
-          <Text className="text-white text-center">
-            Error: {moviesError?.message}
-          </Text>
-        ) : (
-          <View>
-            <SearchBar
-              placeholder="Search for a movie"
-              onPress={onSearchBarPress}
-            />
-            <Text className="text-white mt-8 mb-5 text-lg font-semibold">
-              Latest Movies
-            </Text>
-            <FlatList
-              data={movies}
-              renderItem={({ item }) => <MovieCard {...item} />}
-              keyExtractor={(item) => item.id.toString()}
-              numColumns={3}
-              className="mb-4 mt-3"
-              columnWrapperStyle={{
-                justifyContent: "space-between",
-                gap: 10,
-                marginBottom: 30,
-              }}
-              scrollEnabled={false}
-            />
-          </View>
-        )}
-      </ScrollView>
+        }
+        ListHeaderComponent={
+          <>
+            <View className="w-full flex-row items-center justify-center mt-20">
+              <Image
+                source={icons.logo}
+                className="w-12 h-10 mb-20 mt-24 mx-auto"
+              />
+            </View>
+            <View className="my-5">
+              <SearchBar
+                placeholder="Search for a movie"
+                onPress={onSearchBarPress}
+              />
+              <Text className="text-white mt-8 mb-5 text-lg font-semibold">
+                Latest Movies
+              </Text>
+            </View>
+          </>
+        }
+      />
     </View>
   );
 }
