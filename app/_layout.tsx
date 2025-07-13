@@ -1,10 +1,10 @@
 import { Stack } from "expo-router";
 import "./global.css";
-import { StatusBar } from "react-native";
+import { StatusBar, View } from "react-native";
 
 export default function RootLayout() {
   return (
-    <>
+    <View className="flex-1 bg-primary">
       <StatusBar hidden={true} />
       <Stack>
         <Stack.Screen
@@ -19,6 +19,6 @@ export default function RootLayout() {
           options={{ headerShown: false, animation: "slide_from_right" }}
         />
       </Stack>
-    </>
+    </View>
   );
 }
