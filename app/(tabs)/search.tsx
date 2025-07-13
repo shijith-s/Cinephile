@@ -43,7 +43,7 @@ const SearchPage = () => {
       <Image source={images.bg} className="absolute w-full z-0" />
 
       <FlatList
-        data={movies}
+        data={movies ?? []}
         renderItem={({ item }) => <MovieCard {...item} />}
         keyExtractor={(item) => item.id.toString()}
         numColumns={3}
@@ -75,7 +75,7 @@ const SearchPage = () => {
                 onChangeText={handleSearch}
               />
             </View>
-            {searchQuery && movies.length > 0 && (
+            {searchQuery && movies?.length > 0 && (
               <Text className="text-white text-left text-lg mb-6 mx-5">
                 Search results for{" "}
                 <Text className="text-light-100 font-semibold italic">

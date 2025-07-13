@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 
-const useFetch = (
-  fetchFunction: (query: string | null) => Promise<Movie[]>,
-  autoFetch: boolean = true
+const useFetch = <T>(
+  fetchFunction: (query: string | null) => Promise<T>,
+  autoFetch: boolean = true,
+  query: string | null = null
 ) => {
-  const [data, setData] = useState<Movie[]>([]);
+  const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
 
@@ -23,18 +24,24 @@ const useFetch = (
   };
 
   const reset = () => {
-    setData([]);
+    setData(null);
     setError(null);
     setLoading(false);
   };
 
   useEffect(() => {
     if (autoFetch) {
-      fetchData();
+      fetchData(query);
     }
   }, []);
 
-  return { data, loading, error, reset, refetch: fetchData };
+  return {
+    data,
+    loading,
+    error,
+    reset,
+    refetch: fetchData,
+  };
 };
 
 export default useFetch;
