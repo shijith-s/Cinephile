@@ -9,7 +9,7 @@ import {
 import React from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import { fetchMovieDetails, getMoviePosterUrl } from "@/services/api";
-import useFetch from "@/services/useFetch";
+import useFetchDetails from "@/services/useFetchDetails";
 import icons from "@/constants/icons";
 import { getMovieDetails } from "@/utils/movieUtils";
 import MovieInfo from "@/components/MovieInfo";
@@ -17,7 +17,7 @@ import theme from "@/constants/theme";
 
 const MovieDetails = () => {
   const { id } = useLocalSearchParams();
-  const { data: movieDetails, loading } = useFetch(
+  const { data: movieDetails, loading } = useFetchDetails(
     fetchMovieDetails,
     true,
     id as string
